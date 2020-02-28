@@ -43,10 +43,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\Hero\Archer.cs" />
-    <Compile Include="Models\Hero\BaseHero.cs" />
-    <Compile Include="Models\Hero\Warrior.cs" />
-    <Compile Include="Models\Hero\Wizard.cs" />
+    <Compile Include="Models\Сharacters\BaseCharacter.cs" />
+    <Compile Include="Models\Сharacters\Enemies\BaseEnemy.cs" />
+    <Compile Include="Models\Сharacters\Enemies\Beasts\Beast.cs" />
+    <Compile Include="Models\Сharacters\Enemies\Beasts\BeastBoss.cs" />
+    <Compile Include="Models\Сharacters\Enemies\Rogues\Rogue.cs" />
+    <Compile Include="Models\Сharacters\Enemies\Rogues\RogueBoss.cs" />
+    <Compile Include="Models\Сharacters\Enemies\Skeletons\Skeleton.cs" />
+    <Compile Include="Models\Сharacters\Enemies\Skeletons\SkeletonBoss.cs" />
+    <Compile Include="Models\Сharacters\Hero\Archer.cs" />
+    <Compile Include="Models\Сharacters\Hero\BaseHero.cs" />
+    <Compile Include="Models\Сharacters\Hero\Warrior.cs" />
+    <Compile Include="Models\Сharacters\Hero\Wizard.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

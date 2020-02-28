@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace FirstPtactice_RPG.Models.Hero
+﻿namespace FirstPtactice_RPG.Models.Hero
 {
     class Wizard : BaseHero
     {
         public double ChanceDoubleDamage { get; set; }
-
         public Wizard()
         {
             DPS = 25;
@@ -19,5 +12,4 @@ namespace FirstPtactice_RPG.Models.Hero
             ChanceDoubleDamage = 0.3;
         }
     }
-
 }

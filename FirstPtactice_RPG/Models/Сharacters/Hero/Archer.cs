@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace FirstPtactice_RPG.Models.Hero
+﻿namespace FirstPtactice_RPG.Models.Hero
 {
     class Archer : BaseHero
     {
         public double ChanceDodge { get; set; }
-
         public Archer()
         {
             DPS = 17;
@@ -19,5 +12,4 @@ namespace FirstPtactice_RPG.Models.Hero
             ChanceDodge = 0.15;
         }
     }
-
 }

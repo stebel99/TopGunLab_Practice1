@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace FirstPtactice_RPG.Models.Hero
+﻿namespace FirstPtactice_RPG.Models.Hero
 {
     class Warrior : BaseHero
     {
@@ -18,5 +12,4 @@ namespace FirstPtactice_RPG.Models.Hero
             BlockChance = 0.15;
         }
     }
-
 }
