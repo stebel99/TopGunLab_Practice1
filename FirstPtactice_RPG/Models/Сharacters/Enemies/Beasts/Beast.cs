@@ -4,7 +4,7 @@
     {
         public Beast()
         {
-            Name = "Wild Roar";
+            Name = "Wild Roar"; 
             DPS = Level * 5;
             Health = Level * 50;
             Armour = Level * 1;

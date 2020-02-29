@@ -43,6 +43,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BL\Abstracts\IHeroService.cs" />
+    <Compile Include="BL\EnemyCollection\EnemyCollection.cs" />
+    <Compile Include="BL\HeroService.cs" />
+    <Compile Include="Models\Locations\BaseLocation.cs" />
+    <Compile Include="Models\Locations\FirstAct\ForestBoss.cs" />
+    <Compile Include="Models\Locations\FirstAct\ForestLocation.cs" />
+    <Compile Include="Models\Locations\SecondAct\CampBoss.cs" />
+    <Compile Include="Models\Locations\SecondAct\CampLocation.cs" />
+    <Compile Include="Models\Locations\ThirdAct\GraveBoss.cs" />
+    <Compile Include="Models\Locations\ThirdAct\GraveLocation.cs" />
     <Compile Include="Models\Сharacters\BaseCharacter.cs" />
     <Compile Include="Models\Сharacters\Enemies\BaseEnemy.cs" />
     <Compile Include="Models\Сharacters\Enemies\Beasts\Beast.cs" />
@@ -61,5 +71,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
