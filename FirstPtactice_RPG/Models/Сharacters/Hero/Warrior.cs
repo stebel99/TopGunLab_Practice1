@@ -9,7 +9,7 @@
             Health = 200;
             Armour = 5;
             ChanceCrit = 0.1;
-            BlockChance = 0.15;
+            BlockChance = 0.4;
         }
     }
 }

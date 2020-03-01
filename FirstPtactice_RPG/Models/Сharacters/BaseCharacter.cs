@@ -2,13 +2,13 @@
 {
     abstract class BaseCharacter
     {
-        protected sbyte MaxLevel = 30;
-        protected sbyte Level { get; set; }
-        protected string Name { get; set; }
-        protected double DPS { get; set; } // Damage per second
-        protected int Health { get; set; }
-        protected int Armour { get; set; }
-        protected double ChanceCrit { get; set; }
-        protected int OwnExperience { get; set; }
+        public sbyte MaxLevel = 30;
+        public sbyte Level { get; set; }
+        public string Name { get; set; }
+        public double DPS { get; set; } // Damage per second
+        public int Health { get; set; }
+        public int Armour { get; set; }
+        public double ChanceCrit { get; set; }
+        public int OwnExperience { get; set; }
     }
 }

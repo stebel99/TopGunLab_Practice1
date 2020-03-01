@@ -4,6 +4,7 @@
     {
         void CreateHero();
         void LvlUp();
+        void Figth(int indexMob);
         
     }
 }

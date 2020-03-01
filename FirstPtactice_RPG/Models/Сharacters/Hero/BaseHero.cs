@@ -3,7 +3,7 @@ namespace FirstPtactice_RPG.Models.Hero
 {
     abstract class BaseHero : BaseCharacter
     {
-        protected int NeededExperience { get; set; }
+        public int NeededExperience { get; set; }
         public BaseHero()
         {
             Level = 1;

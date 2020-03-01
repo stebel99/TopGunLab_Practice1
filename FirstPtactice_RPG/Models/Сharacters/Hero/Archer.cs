@@ -9,7 +9,7 @@
             Health = 145;
             Armour = 3;
             ChanceCrit = 0.3;
-            ChanceDodge = 0.15;
+            ChanceDodge = 0.25;
         }
     }
 }

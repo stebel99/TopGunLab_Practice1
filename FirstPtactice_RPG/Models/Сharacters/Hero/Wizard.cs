@@ -9,7 +9,7 @@
             Health = 100;
             Armour = 1;
             ChanceCrit = 0.1;
-            ChanceDoubleDamage = 0.3;
+            ChanceDoubleDamage = 0.35;
         }
     }
 }

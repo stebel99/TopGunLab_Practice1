@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="BL\Abstracts\IHeroService.cs" />
     <Compile Include="BL\EnemyCollection\EnemyCollection.cs" />
+    <Compile Include="BL\EnemyServices.cs" />
     <Compile Include="BL\HeroService.cs" />
     <Compile Include="Models\Locations\BaseLocation.cs" />
     <Compile Include="Models\Locations\FirstAct\ForestBoss.cs" />
@@ -65,6 +66,9 @@
     <Compile Include="Models\Сharacters\Hero\BaseHero.cs" />
     <Compile Include="Models\Сharacters\Hero\Warrior.cs" />
     <Compile Include="Models\Сharacters\Hero\Wizard.cs" />
+    <Compile Include="Pl\CreateHero.cs" />
+    <Compile Include="Pl\MainMenu.cs" />
+    <Compile Include="Pl\StartMenu.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
