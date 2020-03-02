@@ -1,5 +1,4 @@
 ﻿using FirstPtactice_RPG.BL;
-using FirstPtactice_RPG.BL.Abstracts;
 using System;
 
 namespace FirstPtactice_RPG.Pl

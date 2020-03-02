@@ -54,7 +54,6 @@ namespace FirstPtactice_RPG.BL
             hero.Name = create.SelectHeroName();
             MenuNavigation();
         }
-
         public void MenuNavigation()
         {
             MainMenu menu = new MainMenu();
@@ -80,6 +79,7 @@ namespace FirstPtactice_RPG.BL
 
                     if (result == "1")
                     {
+                        menu = null;
                         MenuNavigation();
                     }
                 } while (result != "1");
@@ -91,10 +91,23 @@ namespace FirstPtactice_RPG.BL
                 {
                     if (newResult>=1&&newResult<=6)
                     {
-
+                        EnemyServices enemyServices = new EnemyServices();
+                        if (newResult==1)
+                        {
+                            enemyServices.CreateEnemies(1);
+                        }
+                        else if (newResult == 3)
+                        {
+                            enemyServices.CreateEnemies(3);
+                        }
+                        else if (newResult == 5)
+                        {
+                            enemyServices.CreateEnemies(5);
+                        }
                     }
                     else if(newResult==7)
                     {
+                        menu = null;
                         MenuNavigation();
                     }
                 }

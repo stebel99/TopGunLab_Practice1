@@ -2,7 +2,7 @@
 {
     class Skeleton : BaseEnemy
     {
-        public Skeleton()
+        public Skeleton(int lvl):base(lvl)
         {
             Name = "Skeletron";
             DPS = Level * 10;

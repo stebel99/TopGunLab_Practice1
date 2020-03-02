@@ -2,9 +2,9 @@
 
 namespace FirstPtactice_RPG.Models.Enemies
 {
-    abstract class BaseEnemy : BaseCharacter
+    public abstract class BaseEnemy : BaseCharacter
     {
-        public BaseEnemy(sbyte lvl)
+        public BaseEnemy(int lvl)
         {
             Level = lvl;
         }

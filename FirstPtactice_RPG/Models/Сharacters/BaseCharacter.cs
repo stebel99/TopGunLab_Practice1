@@ -1,9 +1,9 @@
 ﻿namespace FirstPtactice_RPG.Models.Сharacters
 {
-    abstract class BaseCharacter
+    public abstract class BaseCharacter
     {
         public sbyte MaxLevel = 30;
-        public sbyte Level { get; set; }
+        public int Level { get; set; }
         public string Name { get; set; }
         public double DPS { get; set; } // Damage per second
         public int Health { get; set; }

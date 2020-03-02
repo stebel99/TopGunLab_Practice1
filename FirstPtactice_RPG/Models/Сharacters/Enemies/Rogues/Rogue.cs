@@ -2,7 +2,7 @@
 {
     class Rogue : BaseEnemy
     {
-        public Rogue()
+        public Rogue(int lvl):base(lvl)
         {
             Name = "Brigand";
             DPS = Level * 7;

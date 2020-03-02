@@ -3,7 +3,7 @@
     class BeastBoss : BaseEnemy
     {
         public double ChanceParry { get; set; }
-        public BeastBoss()
+        public BeastBoss():base(1)
         {
             Level = 10;
             Name = "Erimanf Boar";

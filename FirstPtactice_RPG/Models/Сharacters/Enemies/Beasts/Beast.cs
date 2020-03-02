@@ -2,7 +2,7 @@
 {
     class Beast : BaseEnemy
     {
-        public Beast()
+        public Beast(int lvl):base(lvl)
         {
             Name = "Wild Roar"; 
             DPS = Level * 5;
