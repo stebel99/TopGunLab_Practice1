@@ -49,6 +49,8 @@ namespace FirstPtactice_RPG.BL.EnemyCollection
             return result;
         }
         int position = -1;
+
+
         T IEnumerator<T>.Current
         {
             get { return elements[position]; }

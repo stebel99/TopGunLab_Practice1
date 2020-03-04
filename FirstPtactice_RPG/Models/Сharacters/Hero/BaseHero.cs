@@ -1,7 +1,7 @@
 ﻿using FirstPtactice_RPG.Models.Сharacters;
 namespace FirstPtactice_RPG.Models.Hero
 {
-    abstract class BaseHero : BaseCharacter
+    public abstract class BaseHero : BaseCharacter
     {
         public int NeededExperience { get; set; }
         public BaseHero()

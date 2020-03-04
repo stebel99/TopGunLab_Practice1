@@ -17,7 +17,6 @@ Select action: ");
             string result = Console.ReadLine();
             return result;
         }
-
         public string HeroInfo(BaseHero hero, string uniqueStats)
         {
             Console.Clear();
@@ -27,7 +26,7 @@ Name         = {hero.Name}
 DPS          = {hero.DPS}
 Health       = {hero.Health}
 Armour       = {hero.Armour}
-Crit Chance  = {hero.ChanceCrit*100}
+Crit Chance  = {hero.ChanceCrit * 100}%
 {uniqueStats}
 Exp          = {hero.OwnExperience}/{hero.NeededExperience}
 

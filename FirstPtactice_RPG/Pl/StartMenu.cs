@@ -7,8 +7,7 @@ namespace FirstPtactice_RPG.Pl
     {
         public string Start()
         {
-            HeroService heroService = new HeroService();
-            Console.Clear();
+           Console.Clear();
            Console.WriteLine(@"Welcome to RPG
 Max Lvl = 30
 Kill enemies - earn exp

@@ -4,7 +4,7 @@ namespace FirstPtactice_RPG
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             HeroService start = new HeroService();
             start.Start();

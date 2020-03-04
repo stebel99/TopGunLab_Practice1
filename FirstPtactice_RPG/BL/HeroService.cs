@@ -11,21 +11,25 @@ namespace FirstPtactice_RPG.BL
         Warrior warrior;
         Wizard wizard;
         BaseHero hero;
+
         public void Start()
         {
             StartMenu startMenu = new StartMenu();
-            string result = startMenu.Start();
-            if (result == "1")
+            for (; ; )
             {
-                CreateHero();
-            }
-            else if (result == "2")
-            {
-                return;
-            }
-            else
-            {
-                Start();
+                string result = startMenu.Start();
+                if (result == "1")
+                {
+                    CreateHero();
+                }
+                else if (result == "2")
+                {
+                    break;
+                }
+                else
+                {
+                    continue;
+                }
             }
         }
         public void CreateHero()
@@ -56,80 +60,119 @@ namespace FirstPtactice_RPG.BL
         }
         public void MenuNavigation()
         {
-            MainMenu menu = new MainMenu();
-            string uniqueStats = null;
-            string result = menu.MainMenuView();
-            if(hero is Warrior)
+            for (; ; )
             {
-                uniqueStats = "Chance Block = 40%";
-            }
-            else if(hero is Archer)
-            {
-                uniqueStats = "Chance Evade = 20%";
-            }
-            else if(hero is Wizard)
-            {
-                uniqueStats = "Chance Double Damage = 35%";
-            }
-            if (result=="1")
-            {
-                do
+                MainMenu menu = new MainMenu();
+                string uniqueStats = null;
+                string result = menu.MainMenuView();
+                if (hero is Warrior)
                 {
-                    result = menu.HeroInfo(hero, uniqueStats);
+                    uniqueStats = "Chance Block = 40%";
+                }
+                else if (hero is Archer)
+                {
+                    uniqueStats = "Chance Evade = 20%";
+                }
+                else if (hero is Wizard)
+                {
+                    uniqueStats = "Chance Double Damage = 35%";
+                }
+                if (result == "1")
+                {
+                    do
+                    {
+                        result = menu.HeroInfo(hero, uniqueStats);
 
-                    if (result == "1")
-                    {
-                        menu = null;
-                        MenuNavigation();
-                    }
-                } while (result != "1");
-            }
-            else if (result == "2")
-            {
-                result = menu.Dungeons();
-                if (Int32.TryParse(result,out int newResult))
+                        if (result == "1")
+                        {
+                            continue;
+                        }
+                    } while (result != "1");
+                }
+                else if (result == "2")
                 {
-                    if (newResult>=1&&newResult<=6)
+                    for (; ; )
                     {
-                        EnemyServices enemyServices = new EnemyServices();
-                        if (newResult==1)
+                        result = menu.Dungeons();
+                        if (Int32.TryParse(result, out int newResult))
                         {
-                            enemyServices.CreateEnemies(1);
+                            if (newResult >= 1 && newResult <= 6)
+                            {
+                                EnemyServices enemyServices = new EnemyServices(hero,this);
+                                switch (newResult)
+                                {
+                                    case 1:
+                                        {
+                                            enemyServices.CreateEnemies(1);
+                                            break;
+                                        }
+                                    case 2:
+                                        {
+                                            enemyServices.CreateBoss(2);
+                                            break;
+                                        }
+                                    case 3:
+                                        {
+                                            enemyServices.CreateEnemies(3);
+                                            break;
+                                        }
+                                    case 4:
+                                        {
+                                            enemyServices.CreateBoss(4);
+                                            break;
+                                        }
+                                    case 5:
+                                        {
+                                            enemyServices.CreateEnemies(5);
+                                            break;
+                                        }
+                                    case 6:
+                                        {
+                                            enemyServices.CreateBoss(6);
+                                            break;
+                                        }
+                                    default:
+                                        break;
+                                }
+                            }
+                            else if (newResult == 7)
+                            {
+                                break;
+                            }
                         }
-                        else if (newResult == 3)
-                        {
-                            enemyServices.CreateEnemies(3);
-                        }
-                        else if (newResult == 5)
-                        {
-                            enemyServices.CreateEnemies(5);
-                        }
-                    }
-                    else if(newResult==7)
-                    {
-                        menu = null;
-                        MenuNavigation();
                     }
                 }
+                else if (result == "3")
+                {
+                    break;
+                }
             }
-            else if (result == "3")
-            {
-                return;
-            }
-            else 
-            {
-                MenuNavigation();
-            }
-
         }
-        public void Figth(int indexMob)
-        {
-            throw new System.NotImplementedException();
-        }
-
         public void LvlUp()
         {
-            throw new System.NotImplementedException();
+            if (hero.Level <= hero.MaxLevel)
+            {
+                hero.Level += 1;
+                hero.NeededExperience *= 2;
+                if (hero is Warrior)
+                {
+                    hero.DPS += 8;
+                    hero.Health += 90;
+                    hero.Armour += 10;
+                }
+                else if (hero is Archer)
+                {
+                    hero.DPS += 10;
+                    hero.Health += 50;
+                    hero.Armour += 7;
+                }
+                else if (hero is Wizard)
+                {
+                    hero.DPS += 12;
+                    hero.Health += 35;
+                    hero.Armour += 5;
+                }
+            }
         }
     }
 }
