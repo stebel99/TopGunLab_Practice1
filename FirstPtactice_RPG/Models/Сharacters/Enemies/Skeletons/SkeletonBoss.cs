@@ -7,12 +7,17 @@
         {
             Level = 30;
             Name = "King Leoric";
-            DPS = 300;
-            Health = 3000;
-            Armour = 200;
+            DPH = 500;
+            Health = 3250;
+            Armour = 250;
             ChanceCrit = 0.3;
             OwnExperience = 7500;
             BlockChance = 0.5;
+        }
+
+        public override object Clone()
+        {
+            return this.MemberwiseClone();
         }
     }
 }

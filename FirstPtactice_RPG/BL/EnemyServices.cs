@@ -15,12 +15,12 @@ namespace FirstPtactice_RPG.BL
         EnemyCollection<BaseEnemy> enemies;
         BaseEnemy baseEnemy;
 
-        readonly BaseHero hero;
-        readonly HeroService heroService;
+        readonly BaseHero _hero;
+        readonly HeroService _heroService;
         public EnemyServices(BaseHero hero, HeroService heroService)
         {
-            this.hero = hero;
-            this.heroService = heroService;
+            _hero = hero;
+            _heroService = heroService;
         }
         readonly Enemies enemiesView = new Enemies();
         public void CreateEnemies(int numberDungeon)
@@ -70,10 +70,16 @@ namespace FirstPtactice_RPG.BL
                 enemies.Add(baseEnemy);
                 baseEnemy = null;
             }
-            string result = enemiesView.ShowEnemies(enemies, nameDungeon);
-            ActionWithEnemies(result, numberDungeon);
+            for (; ; )
+            {
+                string result = enemiesView.ShowEnemies(enemies, nameDungeon);
+                if(ActionWithEnemies(result, numberDungeon))
+                {
+                    break;
+                }
+            }
         }
-        public void ActionWithEnemies(string action, int numberDungeon)
+        public bool ActionWithEnemies(string action, int numberDungeon)
         {
             int result = Int32.Parse(action);
 
@@ -81,80 +87,94 @@ namespace FirstPtactice_RPG.BL
             {
                 CreateEnemies(numberDungeon);
             }
-            else if (result == enemies.Count()+1)
+            else if (result == enemies.Count() + 1)
             {
-                return;
+                return true;
             }
-            else if (result >= 0 && result < 10)
+            else if (result >= 0 && result < enemies.Count())
             {
                 if (FightEnemy(enemies[result]))
                 {
                     enemies.Remove(result);
                 }
             }
+            return false;
         }
-        public bool FightEnemy(BaseEnemy baseEnemy)
+        public bool FightEnemy(BaseEnemy enemy)
         {
-            var fightHero = hero;
+            var fightHero = _hero.Clone();
 
+            BaseEnemy baseEnemy = (BaseEnemy)enemy.Clone();
             double heroDamage;
             double enemyDamage;
-
+            Random rnd = new Random();
             bool heroWin = false;
             for (; ; )
             {
-                heroDamage = CalculationClearDamage(fightHero, baseEnemy);
-                enemyDamage = CalculationClearDamage(baseEnemy, fightHero);
-                baseEnemy.Health -= (int)heroDamage;
-                if (baseEnemy.Health <= 0)
+                int whoHit = rnd.Next(0, 100);
+                if (whoHit < 50)
                 {
-                    heroWin = true;
-                    break;
+                    heroDamage = CalculationClearDamage((BaseCharacter)fightHero, baseEnemy);
+                    baseEnemy.Health -= (int)heroDamage;
+                    if (baseEnemy.Health <= 0)
+                    {
+                        heroWin = true;
+                        break;
+                    }
                 }
-                fightHero.Health -= (int)enemyDamage;
-                if (fightHero.Health<=0)
+                else
                 {
-                    break;
+                    enemyDamage = CalculationClearDamage(baseEnemy, (BaseCharacter)fightHero);
+                    ((BaseCharacter)fightHero).Health -= (int)enemyDamage;
+                    if (((BaseCharacter)fightHero).Health <= 0)
+                    {
+                        break;
+                    }
                 }
             }
             if (heroWin)
             {
-                hero.OwnExperience += baseEnemy.OwnExperience;
-                if (hero.OwnExperience>=hero.NeededExperience)
+                enemiesView.ShowWin(baseEnemy);
+                _hero.OwnExperience += baseEnemy.OwnExperience;
+                if (_hero.OwnExperience >= _hero.NeededExperience)
                 {
-                    heroService.LvlUp();
+                    _heroService.LvlUp();
                 }
+            }
+            else
+            {
+                enemiesView.ShowLose(baseEnemy);
             }
             return heroWin;
         }
         private double CalculationClearDamage(BaseCharacter atacker, BaseCharacter defender)
         {
-            var atackerDamage = atacker.DPS * CalculationCrit(atacker);
+            var atackerDamage = atacker.DPH * CalculationCrit(atacker);
             var rnd = new Random();
             if (atacker is Wizard)
             {
-                if (((Wizard)atacker).ChanceDoubleDamage * 100 <= rnd.Next(0, 100))
+                if (((Wizard)atacker).ChanceDoubleDamage * 100 >= rnd.Next(0, 100))
                 {
                     atackerDamage *= 2;
                 }
             }
             if (defender is BeastBoss)
             {
-                if (((BeastBoss)defender).ChanceParry * 100 <= rnd.Next(0, 100))
+                if (((BeastBoss)defender).ChanceParry * 100 >= rnd.Next(0, 100))
                 {
                     atackerDamage *= 0.75;
                 }
             }
             else if (defender is RogueBoss)
             {
-                if (((RogueBoss)defender).ChanceParry * 100 <= rnd.Next(0, 100))
+                if (((RogueBoss)defender).ChanceParry * 100 >= rnd.Next(0, 100))
                 {
                     atackerDamage *= 0.75;
                 }
             }
             else if (defender is Archer)
             {
-                if (((Archer)defender).ChanceDodge * 100 <= rnd.Next(0, 100))
+                if (((Archer)defender).ChanceDodge * 100 >= rnd.Next(0, 100))
                 {
                     atackerDamage = 0;
                     return atackerDamage;
@@ -162,20 +182,20 @@ namespace FirstPtactice_RPG.BL
             }
             else if (defender is SkeletonBoss)
             {
-                if (((SkeletonBoss)defender).BlockChance * 100 <= rnd.Next(0, 100))
+                if (((SkeletonBoss)defender).BlockChance * 100 >= rnd.Next(0, 100))
                 {
                     atackerDamage *= 0.25;
                 }
             }
             else if (defender is Warrior)
             {
-                if (((Warrior)defender).BlockChance * 100 <= rnd.Next(0, 100))
+                if (((Warrior)defender).BlockChance * 100 >= rnd.Next(0, 100))
                 {
                     atackerDamage *= 0.25;
                 }
             }
             atackerDamage -= defender.Armour;
-            if (atackerDamage<0)
+            if (atackerDamage < 0)
             {
                 atackerDamage = 0;
             }
@@ -226,6 +246,41 @@ namespace FirstPtactice_RPG.BL
                     break;
             }
             string result = enemiesView.ShowBoss(baseEnemy, nameDungeon, uniqueStats);
+            for (;;)
+            {
+                if (ActionWithBoss(result))
+                {
+                    break;
+                }
+            }
+        }
+        public bool ActionWithBoss(string action)
+        {
+            int result = Int32.Parse(action);
+            if (result == 1)
+            {
+                if (FightEnemy(baseEnemy))
+                {
+                    if (baseEnemy is BeastBoss)
+                    {
+
+                    }
+                    else if(baseEnemy is RogueBoss)
+                    {
+
+                    }
+                    else if (baseEnemy is SkeletonBoss)
+                    {
+
+                    }
+                    return true;
+                }
+            }
+            else if (result == 2)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

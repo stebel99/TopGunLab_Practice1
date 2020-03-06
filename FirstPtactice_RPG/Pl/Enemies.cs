@@ -1,5 +1,7 @@
 ﻿using FirstPtactice_RPG.BL.EnemyCollection;
 using FirstPtactice_RPG.Models.Enemies;
+using FirstPtactice_RPG.Models.Enemies.Beasts;
+using FirstPtactice_RPG.Models.Enemies.Rogues;
 using System;
 
 namespace FirstPtactice_RPG.Pl
@@ -13,7 +15,7 @@ namespace FirstPtactice_RPG.Pl
             int length = baseEnemy.Count();
             for (int i = 0; i < length; i++)
             {
-                Console.WriteLine($@"{i}. {baseEnemy[i].Name} - (Lvl {baseEnemy[i].Level}) Stats: DPS-{baseEnemy[i].DPS} Health-{baseEnemy[i].Health} Exp-{baseEnemy[i].OwnExperience}
+                Console.WriteLine($@"{i}. {baseEnemy[i].Name} - (Lvl {baseEnemy[i].Level}) Stats: DPH-{baseEnemy[i].DPH} Health-{baseEnemy[i].Health} Exp-{baseEnemy[i].OwnExperience}
 {new string('-',80)}");
             }
             Console.WriteLine($"{length}. Refresh");
@@ -27,16 +29,65 @@ Select action: ");
         {
             Console.Clear();
             Console.WriteLine($"{nameLocation}\n");
-            Console.WriteLine($@"1. {baseEnemy.Name} - (Lvl {baseEnemy.Level}) 
+            Console.WriteLine($@" {baseEnemy.Name} - (Lvl {baseEnemy.Level}) 
 Stats: 
-DPS - {baseEnemy.DPS}
+Damage per hit - {baseEnemy.DPH}
 Health - {baseEnemy.Health}
 {uniquestats}
 Exp - {baseEnemy.OwnExperience}
 {new string('-',50)}
 
-2.Run Away");
+1. Fight
+2. Run Away");
             return Console.ReadLine();
+        }
+
+        public void ShowWin(BaseEnemy baseEnemy)
+        {
+            if (baseEnemy is BeastBoss || baseEnemy is RogueBoss)
+            {
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.Clear();
+                Console.WriteLine($@"***WIN BOSS***
+You kill boss {baseEnemy.Name}
+And earn {baseEnemy.OwnExperience} Experience");
+                Console.ResetColor();
+                Console.Write("Press any key...");
+                Console.ReadKey();
+            }
+            else if (baseEnemy is SkeletonBoss)
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.Clear();
+                Console.WriteLine($@"***Congrats***
+You kill last boss {baseEnemy.Name}
+And earn {baseEnemy.OwnExperience} Experience");
+                Console.ResetColor();
+                Console.Write("Press any key...");
+                Console.ReadKey();
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.Clear();
+                Console.WriteLine($@"***WIN***
+You kill enemy {baseEnemy.Name}
+And earn {baseEnemy.OwnExperience} Experience");
+                Console.ResetColor();
+                Console.Write("Press any key...");
+                Console.ReadKey();
+            }
+        }
+
+        public void ShowLose(BaseEnemy baseEnemy)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.Clear();
+            Console.WriteLine($@"***LOSE***
+Enemy {baseEnemy.Name} kill you");
+            Console.ResetColor();
+            Console.Write("Press any key...");
+            Console.ReadKey();
         }
     }
 }

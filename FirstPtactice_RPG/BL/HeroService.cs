@@ -153,22 +153,22 @@ namespace FirstPtactice_RPG.BL
             if (hero.Level <= hero.MaxLevel)
             {
                 hero.Level += 1;
-                hero.NeededExperience *= 2;
+                hero.NeededExperience = (hero.NeededExperience*3)/2 + 1;
                 if (hero is Warrior)
                 {
-                    hero.DPS += 8;
+                    hero.DPH += 8;
                     hero.Health += 90;
                     hero.Armour += 10;
                 }
                 else if (hero is Archer)
                 {
-                    hero.DPS += 10;
+                    hero.DPH += 10;
                     hero.Health += 50;
                     hero.Armour += 7;
                 }
                 else if (hero is Wizard)
                 {
-                    hero.DPS += 12;
+                    hero.DPH += 12;
                     hero.Health += 35;
                     hero.Armour += 5;
                 }

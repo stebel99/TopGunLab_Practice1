@@ -1,9 +1,10 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace FirstPtactice_RPG.BL.EnemyCollection
 {
-    public class EnemyCollection<T> : IEnumerable<T>, IEnumerator<T> where T: class
+    public class EnemyCollection<T> : IEnumerable<T>, IEnumerator<T> where T : class
     {
         private T[] elements = null;
 
@@ -27,21 +28,28 @@ namespace FirstPtactice_RPG.BL.EnemyCollection
 
         public void Remove(int index)
         {
-            if (index >= 0 || index <= elements.Length - 1)
-                return;
-            T[] arr = new T[elements.Length-1];
-            for (int i = 0, j=0; i < elements.Length; i++,j++)
+            if (index >= Count())
             {
-                if(i == index)
+                return;
+            }
+
+            T[] newElements = new T[Count() - 1];
+            for (int i = 0, j = 0; i < newElements.Length; i++, j++)
+            {
+                if (i==index)
                 {
                     j++;
                 }
-                else
-                {
-                    arr[i] = elements[j];
-                }
+                newElements[i] = elements[j];
             }
-            arr.CopyTo(elements, 0);
+            elements = new T[newElements.Length];
+            newElements.CopyTo(elements, 0);
+            //int shiftStart = index + 1;
+            //if (shiftStart < Count())
+            //{
+            //    // Shift all the items following index one slot to the left.
+            //    Array.Copy(elements, shiftStart, elements, index, Count() - shiftStart);
+            //}
         }
         public int Count()
         {

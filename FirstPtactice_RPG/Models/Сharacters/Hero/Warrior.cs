@@ -5,11 +5,16 @@
         public double BlockChance { get; set; }
         public Warrior()
         {
-            DPS = 10;
+            DPH = 10;
             Health = 200;
             Armour = 5;
             ChanceCrit = 0.1;
             BlockChance = 0.4;
+        }
+
+        public override object Clone()
+        {
+            return this.MemberwiseClone();
         }
     }
 }

@@ -7,12 +7,17 @@
         {
             Level = 10;
             Name = "Erimanf Boar";
-            DPS = 75;
+            DPH = 75;
             Health = 750;
-            Armour = 15;
+            Armour = 35;
             ChanceCrit = 0.15;
             OwnExperience = 350;
             ChanceParry = 0.3;
+        }
+
+        public override object Clone()
+        {
+            return this.MemberwiseClone();
         }
     }
 }

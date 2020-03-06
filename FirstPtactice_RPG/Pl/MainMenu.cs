@@ -23,7 +23,7 @@ Select action: ");
             Console.WriteLine($@"***Hero Info***
 Lvl          = {hero.Level}/{hero.MaxLevel}
 Name         = {hero.Name}
-DPS          = {hero.DPS}
+Damage per hit = {hero.DPH}
 Health       = {hero.Health}
 Armour       = {hero.Armour}
 Crit Chance  = {hero.ChanceCrit * 100}%

@@ -5,11 +5,16 @@
         public double ChanceDodge { get; set; }
         public Archer()
         {
-            DPS = 17;
+            DPH = 17;
             Health = 145;
             Armour = 3;
             ChanceCrit = 0.3;
             ChanceDodge = 0.25;
+        }
+
+        public override object Clone()
+        {
+            return this.MemberwiseClone();
         }
     }
 }

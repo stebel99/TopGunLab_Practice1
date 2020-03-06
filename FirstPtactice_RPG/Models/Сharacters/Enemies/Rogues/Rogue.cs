@@ -5,11 +5,16 @@
         public Rogue(int lvl):base(lvl)
         {
             Name = "Brigand";
-            DPS = Level * 7;
+            DPH = Level * 10;
             Health = Level * 50;
-            Armour = Level * 2;
+            Armour = Level * 5;
             ChanceCrit = 0.2;
             OwnExperience = Level * 30;
+        }
+
+        public override object Clone()
+        {
+            return this.MemberwiseClone();
         }
     }
 }
