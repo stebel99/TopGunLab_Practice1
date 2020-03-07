@@ -7,20 +7,18 @@ namespace FirstPtactice_RPG.Pl
         public string SelectHeroClassView()
         {
             Console.Clear();
-            Console.WriteLine(@"***Creating Hero***
-Input class hero:
+            Console.WriteLine(@"***   Creating Hero   ***
+Select class hero:
 1. Warrior (Chance block - block 75% damage)
 2. Archer  (Chance evade all damage)
 3. Wizard  (Chance double damage)
 ");
-            string result = Console.ReadLine();
-            return result;
+            return Console.ReadLine();
         }
         public string SelectHeroName()
         {
             Console.Write("Input hero name: ");
-            string result = Console.ReadLine();
-            return result;
+            return Console.ReadLine();
         }
     }
 }

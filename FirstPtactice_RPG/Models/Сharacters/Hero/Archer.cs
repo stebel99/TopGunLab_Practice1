@@ -5,7 +5,7 @@
         public double ChanceDodge { get; set; }
         public Archer()
         {
-            DPH = 17;
+            Damage = 17;
             Health = 145;
             Armour = 3;
             ChanceCrit = 0.3;

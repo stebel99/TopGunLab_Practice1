@@ -7,7 +7,7 @@
         {
             Level = 10;
             Name = "Erimanf Boar";
-            DPH = 75;
+            Damage = 75;
             Health = 750;
             Armour = 35;
             ChanceCrit = 0.15;

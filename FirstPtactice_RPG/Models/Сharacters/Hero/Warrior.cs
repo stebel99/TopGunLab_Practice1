@@ -5,7 +5,7 @@
         public double BlockChance { get; set; }
         public Warrior()
         {
-            DPH = 10;
+            Damage = 10;
             Health = 200;
             Armour = 5;
             ChanceCrit = 0.1;

@@ -5,7 +5,7 @@
         public Rogue(int lvl):base(lvl)
         {
             Name = "Brigand";
-            DPH = Level * 10;
+            Damage = Level * 10;
             Health = Level * 50;
             Armour = Level * 5;
             ChanceCrit = 0.2;

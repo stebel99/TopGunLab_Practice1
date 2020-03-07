@@ -7,7 +7,7 @@
         {
             Level = 20;
             Name = "Bad Robin";
-            DPH = 175;
+            Damage = 175;
             Health = 1000;
             Armour = 120;
             ChanceCrit = 0.35;

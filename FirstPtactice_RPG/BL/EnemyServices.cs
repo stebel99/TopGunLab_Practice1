@@ -6,7 +6,6 @@ using FirstPtactice_RPG.Models.Hero;
 using FirstPtactice_RPG.Models.Сharacters;
 using FirstPtactice_RPG.Pl;
 using System;
-using System.Reflection.Emit;
 
 namespace FirstPtactice_RPG.BL
 {
@@ -23,21 +22,21 @@ namespace FirstPtactice_RPG.BL
             _heroService = heroService;
         }
         readonly Enemies enemiesView = new Enemies();
-        public void CreateEnemies(int numberDungeon)
+        public string CreateEnemies(int numberDungeon)
         {
             string nameDungeon;
             var rnd = new Random();
             if (numberDungeon == 1)
             {
-                nameDungeon = "***Sick Forest***";
+                nameDungeon = "***   Sick Forest   ***";
             }
             else if (numberDungeon == 3)
             {
-                nameDungeon = "***Robber Camp***";
+                nameDungeon = "***   Robber Camp   ***";
             }
             else
             {
-                nameDungeon = "***Graveyard***";
+                nameDungeon = "***   Graveyard   ***";
             }
             enemies = new EnemyCollection<BaseEnemy>();
             int quantity = 10;
@@ -68,34 +67,46 @@ namespace FirstPtactice_RPG.BL
                         break;
                 }
                 enemies.Add(baseEnemy);
-                baseEnemy = null;
             }
+            return nameDungeon;
+
+        }
+        public bool ShowEnemies(string nameDungeon)
+        {
             for (; ; )
             {
                 string result = enemiesView.ShowEnemies(enemies, nameDungeon);
-                if(ActionWithEnemies(result, numberDungeon))
+                if (ActionWithEnemies(result,out bool exit))
                 {
+                    if (exit)
+                    {
+                        return true;
+                    }
                     break;
                 }
             }
+            return false;
         }
-        public bool ActionWithEnemies(string action, int numberDungeon)
+        public bool ActionWithEnemies(string action, out bool exitAction)
         {
-            int result = Int32.Parse(action);
-
-            if (result == enemies.Count())
+            exitAction = false;
+            if (Int32.TryParse(action, out int result))
             {
-                CreateEnemies(numberDungeon);
-            }
-            else if (result == enemies.Count() + 1)
-            {
-                return true;
-            }
-            else if (result >= 0 && result < enemies.Count())
-            {
-                if (FightEnemy(enemies[result]))
+                if (result == enemies.Count())
                 {
-                    enemies.Remove(result);
+                    return true;
+                }
+                else if (result == enemies.Count() + 1)
+                {
+                    exitAction = true;
+                    return true;
+                }
+                else if (result >= 0 && result < enemies.Count())
+                {
+                    if (FightEnemy(enemies[result]))
+                    {
+                        enemies.Remove(result);
+                    }
                 }
             }
             return false;
@@ -149,7 +160,7 @@ namespace FirstPtactice_RPG.BL
         }
         private double CalculationClearDamage(BaseCharacter atacker, BaseCharacter defender)
         {
-            var atackerDamage = atacker.DPH * CalculationCrit(atacker);
+            var atackerDamage = atacker.Damage * CalculationCrit(atacker);
             var rnd = new Random();
             if (atacker is Wizard)
             {
@@ -215,70 +226,58 @@ namespace FirstPtactice_RPG.BL
                 return 1.5;
             }
         }
-        public void CreateBoss(int numberDungeon)
+        public string CreateBoss(int numberDungeon)
         {
             string nameDungeon = "";
-            string uniqueStats = "";
             switch (numberDungeon)
             {
                 case 2:
                     {
-                        nameDungeon = "***Edge Forest***";
-                        uniqueStats = "ChanceParry = 30%";
+                        nameDungeon = "***   Edge Forest   ***";
                         baseEnemy = new BeastBoss();
                         break;
                     }
                 case 4:
                     {
-                        nameDungeon = "***Rogue Trap***";
-                        uniqueStats = "ChanceParry = 30%";
+                        nameDungeon = "***   Rogue Trap   ***";
                         baseEnemy = new RogueBoss();
                         break;
                     }
                 case 6:
                     {
-                        nameDungeon = "***Tomb***";
-                        uniqueStats = "BlockChance = 50%";
+                        nameDungeon = "***   Tomb   ***";
                         baseEnemy = new SkeletonBoss();
                         break;
                     }
                 default:
                     break;
             }
-            string result = enemiesView.ShowBoss(baseEnemy, nameDungeon, uniqueStats);
-            for (;;)
+            return nameDungeon;
+        }
+        public void ShowBoss(string nameDungeon)
+        {
+            for (; ;)
             {
+                string result = enemiesView.ShowBoss(baseEnemy, nameDungeon);
                 if (ActionWithBoss(result))
                 {
                     break;
                 }
-            }
+            } 
         }
         public bool ActionWithBoss(string action)
         {
-            int result = Int32.Parse(action);
-            if (result == 1)
+            if (Int32.TryParse(action, out int result))
             {
-                if (FightEnemy(baseEnemy))
+                if (result == 1)
                 {
-                    if (baseEnemy is BeastBoss)
-                    {
-
-                    }
-                    else if(baseEnemy is RogueBoss)
-                    {
-
-                    }
-                    else if (baseEnemy is SkeletonBoss)
-                    {
-
-                    }
+                    return FightEnemy(baseEnemy);
+   
+                }
+                if(result == 2)
+                {
                     return true;
                 }
-            }
-            else if (result == 2)
-            {
-                return true;
             }
             return false;
         }

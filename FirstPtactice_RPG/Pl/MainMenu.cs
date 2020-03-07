@@ -8,38 +8,48 @@ namespace FirstPtactice_RPG.Pl
         public string MainMenuView()
         {
             Console.Clear();
-            Console.Write(@"***Menu***
+            Console.Write(@"***   Menu   ***
 1. Hero info
 2. Dungeons
 3. Exit
 
 Select action: ");
-            string result = Console.ReadLine();
-            return result;
+            return Console.ReadLine();
         }
-        public string HeroInfo(BaseHero hero, string uniqueStats)
+        public string HeroInfo(BaseHero hero)
         {
             Console.Clear();
-            Console.WriteLine($@"***Hero Info***
-Lvl          = {hero.Level}/{hero.MaxLevel}
-Name         = {hero.Name}
-Damage per hit = {hero.DPH}
-Health       = {hero.Health}
-Armour       = {hero.Armour}
-Crit Chance  = {hero.ChanceCrit * 100}%
-{uniqueStats}
-Exp          = {hero.OwnExperience}/{hero.NeededExperience}
+            Console.Write($@"***   Hero Info   ***
+Lvl                    = {hero.Level}/{hero.MaxLevel}
+Name                   = {hero.Name}
+Damage                 = {hero.Damage}
+Health                 = {hero.Health}
+Armour                 = {hero.Armour}
+Crit Chance            = {hero.ChanceCrit * 100}%
+");
+            if (hero is Warrior)
+            {
+                Console.WriteLine($"Chance block           = {((Warrior)hero).BlockChance *100}%");
+            }
+            else if (hero is Archer)
+            {
+                Console.WriteLine($"Chance evade           = {((Archer)hero).ChanceDodge * 100}%");
+            }
+            else if (hero is Wizard)
+            {
+                Console.WriteLine($"Chance double damage   = {((Wizard)hero).ChanceDoubleDamage * 100}%");
+            }
+            Console.WriteLine($@"Exp                    = {hero.OwnExperience}/{hero.NeededExperience}
 
 Select action:
 1. Back
 ");
-            string result = Console.ReadLine();
-            return result;
+            return Console.ReadLine();
         }
         public string Dungeons()
         {
             Console.Clear();
-            Console.WriteLine(@"***Dungeons***
+            Console.WriteLine(@"***   Dungeons   ***
 1. Sick Forest (Mobs lvl 1-10)
 2. Forest Edge (Boss lvl 10)
 3. Robber Camp (Mobs lvl 11-20)
@@ -49,8 +59,7 @@ Select action:
 
 7. Back
 ");
-            string result = Console.ReadLine();
-            return result;
+            return Console.ReadLine();
         }
     }
 }

@@ -5,7 +5,7 @@
         public Beast(int lvl):base(lvl)
         {
             Name = "Wild Roar"; 
-            DPH = Level * 6;
+            Damage = Level * 6;
             Health = Level * 50;
             Armour = Level * 3;
             ChanceCrit = 0.1;

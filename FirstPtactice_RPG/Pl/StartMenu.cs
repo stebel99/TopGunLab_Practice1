@@ -1,5 +1,4 @@
-﻿using FirstPtactice_RPG.BL;
-using System;
+﻿using System;
 
 namespace FirstPtactice_RPG.Pl
 {
@@ -8,7 +7,7 @@ namespace FirstPtactice_RPG.Pl
         public string Start()
         {
            Console.Clear();
-           Console.WriteLine(@"Welcome to RPG
+           Console.WriteLine(@"    Welcome to Role Played Game
 Max Lvl = 30
 Kill enemies - earn exp
 Kill third main boss - complete game
@@ -18,8 +17,7 @@ Select an action:
 1: Create Hero
 2: Exit
 ");
-            string result = Console.ReadLine();
-            return result;
+            return Console.ReadLine();
         }
     }
 }

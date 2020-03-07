@@ -76,6 +76,7 @@
     <Compile Include="Models\Сharacters\Hero\Wizard.cs" />
     <Compile Include="Pl\CreateHero.cs" />
     <Compile Include="Pl\Enemies.cs" />
+    <Compile Include="Pl\LvlUpView.cs" />
     <Compile Include="Pl\MainMenu.cs" />
     <Compile Include="Pl\StartMenu.cs" />
     <Compile Include="Program.cs" />

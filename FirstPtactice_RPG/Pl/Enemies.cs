@@ -15,8 +15,8 @@ namespace FirstPtactice_RPG.Pl
             int length = baseEnemy.Count();
             for (int i = 0; i < length; i++)
             {
-                Console.WriteLine($@"{i}. {baseEnemy[i].Name} - (Lvl {baseEnemy[i].Level}) Stats: DPH-{baseEnemy[i].DPH} Health-{baseEnemy[i].Health} Exp-{baseEnemy[i].OwnExperience}
-{new string('-',80)}");
+                Console.WriteLine($@"{i}. {baseEnemy[i].Name} - (Lvl {baseEnemy[i].Level}) Stats: Damage = {baseEnemy[i].Damage} Health = {baseEnemy[i].Health} Exp = {baseEnemy[i].OwnExperience}
+{new string('_',80)}");
             }
             Console.WriteLine($"{length}. Refresh");
             Console.Write($@"{length+1}. Back
@@ -25,17 +25,28 @@ Select action: ");
             return Console.ReadLine();
         }
 
-        public string ShowBoss(BaseEnemy baseEnemy, string nameLocation, string uniquestats)
+        public string ShowBoss(BaseEnemy baseEnemy, string nameLocation)
         {
             Console.Clear();
-            Console.WriteLine($"{nameLocation}\n");
-            Console.WriteLine($@" {baseEnemy.Name} - (Lvl {baseEnemy.Level}) 
+            Console.WriteLine($@"{nameLocation}
+{baseEnemy.Name} - (Lvl {baseEnemy.Level}) 
 Stats: 
-Damage per hit - {baseEnemy.DPH}
-Health - {baseEnemy.Health}
-{uniquestats}
-Exp - {baseEnemy.OwnExperience}
-{new string('-',50)}
+Damage        = {baseEnemy.Damage}
+Health        = {baseEnemy.Health}");
+            if (baseEnemy is BeastBoss)
+            {
+                Console.WriteLine($"Chance Parry  = {((BeastBoss)baseEnemy).ChanceParry*100}%");
+            }
+            else if (baseEnemy is RogueBoss)
+            {
+                Console.WriteLine($"Chance Parry  = {((RogueBoss)baseEnemy).ChanceParry * 100}%");
+            }
+            else if (baseEnemy is SkeletonBoss)
+            {
+                Console.WriteLine($"Block Chance  = {((SkeletonBoss)baseEnemy).BlockChance * 100}%");
+            }
+            Console.WriteLine($@"Exp           = {baseEnemy.OwnExperience}
+{new string('_',50)}
 
 1. Fight
 2. Run Away");
@@ -61,7 +72,7 @@ And earn {baseEnemy.OwnExperience} Experience");
                 Console.Clear();
                 Console.WriteLine($@"***Congrats***
 You kill last boss {baseEnemy.Name}
-And earn {baseEnemy.OwnExperience} Experience");
+And complete the game!)");
                 Console.ResetColor();
                 Console.Write("Press any key...");
                 Console.ReadKey();

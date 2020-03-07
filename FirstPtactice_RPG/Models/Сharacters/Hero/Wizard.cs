@@ -5,7 +5,7 @@
         public double ChanceDoubleDamage { get; set; }
         public Wizard()
         {
-            DPH = 25;
+            Damage = 25;
             Health = 100;
             Armour = 1;
             ChanceCrit = 0.1;

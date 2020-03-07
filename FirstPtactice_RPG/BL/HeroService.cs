@@ -15,21 +15,10 @@ namespace FirstPtactice_RPG.BL
         public void Start()
         {
             StartMenu startMenu = new StartMenu();
-            for (; ; )
+            string result = startMenu.Start();
+            if (result == "1")
             {
-                string result = startMenu.Start();
-                if (result == "1")
-                {
-                    CreateHero();
-                }
-                else if (result == "2")
-                {
-                    break;
-                }
-                else
-                {
-                    continue;
-                }
+                CreateHero();
             }
         }
         public void CreateHero()
@@ -63,29 +52,16 @@ namespace FirstPtactice_RPG.BL
             for (; ; )
             {
                 MainMenu menu = new MainMenu();
-                string uniqueStats = null;
                 string result = menu.MainMenuView();
-                if (hero is Warrior)
-                {
-                    uniqueStats = "Chance Block = 40%";
-                }
-                else if (hero is Archer)
-                {
-                    uniqueStats = "Chance Evade = 20%";
-                }
-                else if (hero is Wizard)
-                {
-                    uniqueStats = "Chance Double Damage = 35%";
-                }
                 if (result == "1")
                 {
                     do
                     {
-                        result = menu.HeroInfo(hero, uniqueStats);
+                        result = menu.HeroInfo(hero);
 
                         if (result == "1")
                         {
-                            continue;
+                            break;
                         }
                     } while (result != "1");
                 }
@@ -93,42 +69,36 @@ namespace FirstPtactice_RPG.BL
                 {
                     for (; ; )
                     {
-                        result = menu.Dungeons();
-                        if (Int32.TryParse(result, out int newResult))
+                        var dungeons = menu.Dungeons();
+                        if (Int32.TryParse(dungeons, out int newResult))
                         {
                             if (newResult >= 1 && newResult <= 6)
                             {
-                                EnemyServices enemyServices = new EnemyServices(hero,this);
+                                EnemyServices enemyServices = new EnemyServices(hero, this);
+                                string nameDungeon;
                                 switch (newResult)
                                 {
                                     case 1:
-                                        {
-                                            enemyServices.CreateEnemies(1);
-                                            break;
-                                        }
-                                    case 2:
-                                        {
-                                            enemyServices.CreateBoss(2);
-                                            break;
-                                        }
                                     case 3:
-                                        {
-                                            enemyServices.CreateEnemies(3);
-                                            break;
-                                        }
-                                    case 4:
-                                        {
-                                            enemyServices.CreateBoss(4);
-                                            break;
-                                        }
                                     case 5:
                                         {
-                                            enemyServices.CreateEnemies(5);
+                                            for (;;)
+                                            {
+                                                nameDungeon = enemyServices.CreateEnemies(newResult);
+                                                if (enemyServices.ShowEnemies(nameDungeon))
+                                                {
+                                                    break;
+                                                }
+                                            }
                                             break;
+
                                         }
+                                    case 2:
+                                    case 4:
                                     case 6:
                                         {
-                                            enemyServices.CreateBoss(6);
+                                            nameDungeon = enemyServices.CreateBoss(newResult);
+                                            enemyServices.ShowBoss(nameDungeon);
                                             break;
                                         }
                                     default:
@@ -150,28 +120,31 @@ namespace FirstPtactice_RPG.BL
         }
         public void LvlUp()
         {
-            if (hero.Level <= hero.MaxLevel)
+            if (hero.Level < hero.MaxLevel)
             {
+                BaseHero oldHero = (BaseHero)hero.Clone();
                 hero.Level += 1;
-                hero.NeededExperience = (hero.NeededExperience*3)/2 + 1;
+                hero.NeededExperience = (hero.NeededExperience * 3) / 2 + 1;
+                LvlUpView lvlUpView = new LvlUpView();
                 if (hero is Warrior)
                 {
-                    hero.DPH += 8;
+                    hero.Damage += 8;
                     hero.Health += 90;
                     hero.Armour += 10;
                 }
                 else if (hero is Archer)
                 {
-                    hero.DPH += 10;
+                    hero.Damage += 10;
                     hero.Health += 50;
                     hero.Armour += 7;
                 }
                 else if (hero is Wizard)
                 {
-                    hero.DPH += 12;
+                    hero.Damage += 12;
                     hero.Health += 35;
                     hero.Armour += 5;
                 }
+                lvlUpView.ShowNewStats(oldHero, hero);
             }
         }
     }

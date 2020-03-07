@@ -7,7 +7,7 @@ namespace FirstPtactice_RPG.Models.Сharacters
         public sbyte MaxLevel = 30;
         public int Level { get; set; }
         public string Name { get; set; }
-        public double DPH { get; set; } // Damage per hit
+        public double Damage { get; set; } // Damage per hit
         public int Health { get; set; }
         public int Armour { get; set; }
         public double ChanceCrit { get; set; }

@@ -7,7 +7,7 @@
         {
             Level = 30;
             Name = "King Leoric";
-            DPH = 500;
+            Damage = 500;
             Health = 3250;
             Armour = 250;
             ChanceCrit = 0.3;
