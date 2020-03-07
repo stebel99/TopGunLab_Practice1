@@ -9,6 +9,15 @@ using System;
 
 namespace FirstPtactice_RPG.BL
 {
+    delegate void UI();
+    class MyEvent
+    {
+        public event UI UserEvent;
+        public void OnUserEvent()
+        {
+            UserEvent();
+        }
+    }
     public class EnemyServices
     {
         EnemyCollection<BaseEnemy> enemies;
@@ -149,7 +158,9 @@ namespace FirstPtactice_RPG.BL
                 _hero.OwnExperience += baseEnemy.OwnExperience;
                 if (_hero.OwnExperience >= _hero.NeededExperience)
                 {
-                    _heroService.LvlUp();
+                    MyEvent myEvent = new MyEvent();
+                    myEvent.UserEvent += _heroService.LvlUp;
+                    myEvent.OnUserEvent();
                 }
             }
             else

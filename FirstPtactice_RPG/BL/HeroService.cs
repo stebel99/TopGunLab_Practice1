@@ -11,7 +11,6 @@ namespace FirstPtactice_RPG.BL
         Warrior warrior;
         Wizard wizard;
         BaseHero hero;
-
         public void Start()
         {
             StartMenu startMenu = new StartMenu();
